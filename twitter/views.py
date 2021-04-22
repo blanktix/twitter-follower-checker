@@ -33,7 +33,7 @@ def daftar_following_not_followers(request, nama=""):
     pengikut=[]
     cursor = -1
     while(cursor !=0):
-        follower = requests.get(url="https://api.twitter.com/1.1/followers/list.json?screen_name={}&&count=200&&cursor={}".format(nama, cursor) , headers={"Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAHH2KQEAAAAA8R5GY7ylEnRNpKMgf1IjSVA60qY%3DtGuPrHi7UCgSR7vIj2y5aPyxpBNoxMgVOpnTmXkxSNjrwePVZS"})
+        follower = requests.get(url="https://api.twitter.com/1.1/followers/list.json?screen_name={}&&count=200&&cursor={}".format(nama, cursor) , headers={"Authorization": f"Bearer {env('BEARER_TOKEN')}"})
         data = follower.json()
         for x in data['users']:
             pengikut.append({x["name"]:x["screen_name"]})
@@ -41,7 +41,7 @@ def daftar_following_not_followers(request, nama=""):
     mengikuti=[]
     cursor = -1
     while(cursor !=0):
-        follower = requests.get(url="https://api.twitter.com/1.1/friends/list.json?screen_name={}&&count=200&&cursor={}".format(nama, cursor) , headers={"Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAHH2KQEAAAAA8R5GY7ylEnRNpKMgf1IjSVA60qY%3DtGuPrHi7UCgSR7vIj2y5aPyxpBNoxMgVOpnTmXkxSNjrwePVZS"})
+        follower = requests.get(url="https://api.twitter.com/1.1/friends/list.json?screen_name={}&&count=200&&cursor={}".format(nama, cursor) , headers={"Authorization": f"Bearer {env('BEARER_TOKEN')}"})
         data = follower.json()
         for x in data['users']:
             mengikuti.append({x["name"]:x["screen_name"]})
